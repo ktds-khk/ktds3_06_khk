@@ -1,0 +1,9 @@
+streamlit==1.32.0
+pandas==2.0.3
+plotly==5.18.0
+python-dotenv==1.0.0
+azure-storage-blob==12.19.0
+azure-search-documents==11.4.0
+azure-identity==1.15.0
+azure-core==1.29.5
+openai==0.28.1
