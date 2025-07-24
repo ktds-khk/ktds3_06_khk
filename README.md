@@ -34,23 +34,47 @@ ITO 서비스의 Looks 관제 이벤트 발생 패턴을 AI가 자동으로 분�
 | **AI 분석**       | Azure OpenAI (GPT-4o) - 이벤트 요약 및 유사 사례 분석 |
 | **Storage**       | Azure Blob Storage - CSV 로그 파일 저장 및 연동 |
 
-## 아키텍처 개요
-[사용자] 
-    ↓ 
-(Streamlit 웹 UI - Azure Web App 내 컨테이너 배포)
-   ├── CSV 업로드
-   └── 분석/리포트 결과 확인
-    ↓
-[CSV 파일 저장 (Azure Blob Storage 등)]
-    ↓
-[분석 파이프라인]
-   ├── LLM (Azure OpenAI/LangGraph 등)
-   ├── RAG (검색증강생성, Azure AI Search 활용)
-   └── 통계/트렌드 분석
-    ↓
-[분석/리포트 결과]
-   ├── 실시간 분류 및 통계 리포트
-   ├── 유사사례 매칭 및 해결책 추천
-   └── 월간/주기별 보고서 활용
-   
-https://webapp-ito-events-001-cwc8b6efgnb4d5c9.koreacentral-01.azurewebsites.net/
+---
+
+## 2. 시스템 구성 및 분석 흐름
+
+### 🔄 전체 흐름도
+
+![분석 흐름도](images/flowchart.png)
+
+---
+
+###이벤트 수집 및 전처리
+
+- **Looks 관제 시스템**에서 CSV 이벤트 로그 추출  
+- **Streamlit UI**를 통해 로그 업로드  
+- **이벤트 파서**가 로그를 검증 및 구조화  
+
+###AI 분석 플로우
+
+- 전처리된 이벤트 기반 분석:
+  - 시간대별 패턴
+  - 서비스 간 상관관계
+  - 알려진 장애 패턴 매칭
+  - 반복 이벤트 탐지
+- **Azure OpenAI (GPT-4o)** 활용:
+  - 근본 원인 분석
+  - 비즈니스 영향 평가
+  - 즉시 조치사항 및 장기 개선방안 제안
+- **Azure AI Search**를 통한 유사 사례 검색
+  
+## 시각화 및 리포트 생성
+
+- **대시보드 시각화**:
+  - 서비스 헬스 매트릭스
+  - SLA 준수율 게이지
+  - 이벤트 타임라인
+  - 영향도 히트맵
+- **자동 리포트 생성**:
+  - Executive Summary
+  - 상세 분석 결과
+  - AI 권고사항
+  - Action Items
+
+---
+
