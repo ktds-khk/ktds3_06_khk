@@ -34,5 +34,48 @@ ITO 서비스의 Looks 관제 이벤트 발생 패턴을 AI가 자동으로 분�
 | **AI 분석**       | Azure OpenAI (GPT-4o) - 이벤트 요약 및 유사 사례 분석 |
 | **Storage**       | Azure Blob Storage - CSV 로그 파일 저장 및 연동 |
 
----
+## 상세 데이터 플로우
+## 이벤트 수집 및 전처리
+[Looks 관제 시스템] 
+    ↓ (CSV Export)
+[이벤트 로그 파일]
+    ↓ (Upload)
+[Streamlit UI]
+    ↓ (Parse & Validate)
+[Event Processor]
+    ├─ 서비스 분류 (looks-api, looks-web, looks-db...)
+    ├─ 카테고리 매핑 (PERFORMANCE, AVAILABILITY...)
+    ├─ 영향도 계산
+    └─ SLA 위반 체크
+## AI 분석 플로우
+[전처리된 이벤트]
+    ↓
+[패턴 분석]
+    ├─ 시간대별 패턴
+    ├─ 서비스 상관관계
+    ├─ 알려진 패턴 매칭
+    └─ 반복 이벤트 탐지
+    ↓
+[AI 분석 (GPT-4o)]
+    ├─ 근본 원인 분석
+    ├─ 비즈니스 영향 평가
+    ├─ 즉시 조치사항 도출
+    └─ 장기 개선방안 제시
+    ↓
+[유사 사례 검색]
+    └─ Azure AI Search 활용
+## 시각화 및 리포팅
+[분석 결과]
+    ↓
+[대시보드 생성]
+    ├─ 서비스 헬스 매트릭스
+    ├─ SLA 준수율 게이지
+    ├─ 이벤트 타임라인
+    └─ 영향도 히트맵
+    ↓
+[리포트 생성]
+    ├─ Executive Summary
+    ├─ 상세 분석 결과
+    ├─ AI 권고사항
+    └─ Action Items
 https://webapp-ito-events-001-cwc8b6efgnb4d5c9.koreacentral-01.azurewebsites.net/
