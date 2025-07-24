@@ -35,13 +35,22 @@ ITO 서비스의 Looks 관제 이벤트 발생 패턴을 AI가 자동으로 분�
 | **Storage**       | Azure Blob Storage - CSV 로그 파일 저장 및 연동 |
 
 ## 아키텍처 개요
-[사용자] → (Streamlit 웹 UI) → [Azure Web App (컨테이너 배포)] →  
-   |                  |  
- CSV 업로드          분석/리포트 보기  
-   |                  |  
-[CSV파일 저장(Blob 등)]  
-   ↓  
-[분석 파이프라인] (LLM, RAG, Azure AI Search)  
-   ↓  
-[분석/리포트]  
+[사용자] 
+    ↓ 
+(Streamlit 웹 UI - Azure Web App 내 컨테이너 배포)
+   ├── CSV 업로드
+   └── 분석/리포트 결과 확인
+    ↓
+[CSV 파일 저장 (Azure Blob Storage 등)]
+    ↓
+[분석 파이프라인]
+   ├── LLM (Azure OpenAI/LangGraph 등)
+   ├── RAG (검색증강생성, Azure AI Search 활용)
+   └── 통계/트렌드 분석
+    ↓
+[분석/리포트 결과]
+   ├── 실시간 분류 및 통계 리포트
+   ├── 유사사례 매칭 및 해결책 추천
+   └── 월간/주기별 보고서 활용
+   
 https://webapp-ito-events-001-cwc8b6efgnb4d5c9.koreacentral-01.azurewebsites.net/
